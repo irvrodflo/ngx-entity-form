@@ -1,0 +1,38 @@
+{
+  "name": "@irv-labs/ngx-entity-forms",
+  "version": "1.0.0",
+  "license": "MIT",
+  "description": "Typed reactive forms for Angular. Build strongly-typed forms from your entity interfaces with minimal boilerplate.",
+  "keywords": [
+    "angular",
+    "forms",
+    "reactive-forms",
+    "typed-forms",
+    "entity-forms",
+    "form-builder",
+    "typescript",
+    "angular-library",
+    "form-validation",
+    "angular-forms"
+  ],
+  "peerDependencies": {
+    "@angular/common": ">=17.0.0",
+    "@angular/core": ">=17.0.0",
+    "@angular/forms": ">=17.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@angular/common": {
+      "optional": false
+    },
+    "@angular/core": {
+      "optional": false
+    },
+    "@angular/forms": {
+      "optional": false
+    }
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false
+}
