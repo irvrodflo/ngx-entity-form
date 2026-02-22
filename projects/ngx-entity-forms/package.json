@@ -1,6 +1,6 @@
 {
   "name": "@irv-labs/ngx-entity-forms",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "MIT",
   "description": "Typed reactive forms for Angular. Build strongly-typed forms from your entity interfaces with minimal boilerplate.",
   "keywords": [

@@ -13,7 +13,7 @@ Strongly-typed reactive forms for Angular. Define your entity interface — the 
 ## Installation
 
 ```bash
-npm install ngx-entity-forms
+npm install @irv-labs/ngx-entity-forms
 ```
 
 ---
@@ -21,7 +21,7 @@ npm install ngx-entity-forms
 ## Quick Start
 
 ```typescript
-import { entity, entityForm } from 'ngx-entity-forms';
+import { entity, entityForm } from '@irv-labs/ngx-entity-forms';
 
 export interface ProductForm {
   name: string;
@@ -129,7 +129,7 @@ export interface ProductForm {
 Use `patchFileControl` and `clearFileControl` to connect the native input:
 
 ```typescript
-import { patchFileControl, clearFileControl } from 'ngx-entity-forms';
+import { patchFileControl, clearFileControl } from '@irv-labs/ngx-entity-forms';
 
 @Component({
   template: `
@@ -172,7 +172,7 @@ Register validators once in `app.config.ts`. They are applied automatically to e
 
 ```typescript
 // app.config.ts
-import { provideDefaultValidators } from 'ngx-entity-forms';
+import { provideDefaultValidators } from '@irv-labs/ngx-entity-forms';
 
 provideDefaultValidators({
   all: [Validators.maxLength(255)], // every control
@@ -195,7 +195,7 @@ Merges your custom messages on top of the English built-ins. Only define what yo
 
 ```typescript
 // app.config.ts
-import { provideErrorMessages } from 'ngx-entity-forms';
+import { provideErrorMessages } from '@irv-labs/ngx-entity-forms';
 
 provideErrorMessages({
   // Custom validator messages
@@ -225,7 +225,7 @@ minPrice: (err) => `Min price is ${err.min}`;
 Switches all built-in messages to a supported locale (`'en'` | `'es'`). Optionally extend with your custom messages on top.
 
 ```typescript
-import { provideErrorMessagesLocale } from 'ngx-entity-forms';
+import { provideErrorMessagesLocale } from '@irv-labs/ngx-entity-forms';
 
 // Spanish built-ins only
 provideErrorMessagesLocale('es');
@@ -391,7 +391,7 @@ import {
   patchFileControl,
   clearFileControl,
   FieldErrorsPipe,
-} from 'ngx-entity-forms';
+} from '@irv-labs/ngx-entity-forms';
 
 export interface ProductForm {
   name: string;
@@ -430,6 +430,8 @@ function noNegativePrice(control: AbstractControl): ValidationErrors | null {
   `,
 })
 export class ProductFormComponent {
+  @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
+
   protected form = entityForm<ProductForm>({
     name: entity.required('', Validators.minLength(3)),
     description: entity.optional<string>(null),
@@ -475,6 +477,34 @@ export class ProductFormComponent {
 | `ErrorMessages`              | Error messages map type                                                              |
 | `SupportedLocale`            | `'en' \| 'es'`                                                                       |
 | `DefaultValidatorsConfig`    | Config type for `provideDefaultValidators`                                           |
+
+---
+
+## Path Alias (optional)
+
+If you prefer a shorter import, configure a path alias in your `tsconfig.json`:
+
+```json
+{
+  "compilerOptions": {
+    "paths": {
+      "@entity-forms": ["./node_modules/@irv-labs/ngx-entity-forms"]
+    }
+  }
+}
+```
+
+Then import from the alias instead:
+
+```typescript
+// Before
+import { entity, entityForm, FieldErrorsPipe } from '@irv-labs/ngx-entity-forms';
+
+// After
+import { entity, entityForm, FieldErrorsPipe } from '@entity-forms';
+```
+
+> This is purely a local convenience — it does not affect the published package or your teammates unless they add the same alias to their `tsconfig.json`.
 
 ---
 
