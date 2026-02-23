@@ -53,11 +53,17 @@ protected form = entityForm<ProductForm>({
 
 Creates a non-nullable `FormControl` with `Validators.required` applied automatically.
 
+The initial value can be any valid value for the field type — including `null` when you want the field to start empty. The type of the control is always inferred from the generic parameter, not the initial value.
+
 ```typescript
-entity.required('');
+entity.required(''); // starts empty
 entity.required(0); // 0 is a valid initial value
 entity.required(false); // false is a valid initial value
+entity.required<string>(null); // starts null, control type is FormControl<string>
+entity.required<number>(null); // starts null, control type is FormControl<number>
 ```
+
+> When passing `null`, always annotate the generic explicitly — TypeScript cannot infer the type from `null` alone.
 
 The second argument is flexible — pick whatever fits:
 
@@ -359,11 +365,12 @@ export interface ProductForm {
 protected form = entityForm<ProductForm>({ ... });
 ```
 
-### `0` and `false` are valid initial values
+### `0`, `false`, and `null` are valid initial values
 
 ```typescript
 entity.required(0); // stock starting at zero
 entity.required(false); // checkbox starting unchecked
+entity.required<string>(null); // field starting empty — annotate the generic explicitly
 ```
 
 ### Always use `getRawValue()` on submit
